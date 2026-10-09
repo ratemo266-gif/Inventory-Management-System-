@@ -4,7 +4,6 @@ import requests
 
 BASE_URL = "http://127.0.0.1:5000/api/inventory"
 EXTERNAL_URL = "http://127.0.0.1:5000/api/external"
-
 def display_dashboard():
     print("\n" + "="*50)
     print(" RETAIL INVENTORY MANAGEMENT CONSOLE PORTAL")
@@ -103,15 +102,15 @@ def handle_patch():
     else:
         print("Modification failed:", res.json().get('error'))
 
+
 def handle_delete():
-    target_id = input("Provide resource ID targeted for truncation: ")
-    verify = input(f"Are you sure you want to drop item ID {target_id}? (y/n): ")
-    if verify.lower() == 'y':
-        res = requests.delete(f"{BASE_URL}/{target_id}")
-        if res.status_code == 200:
-            print("Purge operations verified.")
-        else:
-            print("Deletion failed:", res.json().get('error'))
+    target_id = input("Enter Inventory Item ID to delete: ")
+    res = requests.delete(f"{BASE_URL}/{target_id}")
+    if res.status_code == 200:
+        print("Deletion performed successfully.")
+    else:
+        print("Deletion failed:", res.json().get('error'))
+
 
 def main():
     while True:
